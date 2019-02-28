@@ -8,6 +8,8 @@ package com.fundoo.services;
 
 
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fundoo.dao.UserDAO;
 import com.fundoo.dto.UserDto;
+import com.fundoo.models.LogInTime;
 import com.fundoo.models.User;
 import com.fundoo.utility.UserToken;
 import com.fundoo.utility.Utility;
@@ -197,6 +200,31 @@ public  class UserServiceImpl implements UserService {
 		return true;
 	}
 
+
+
+	@Override
+	public List<LogInTime> getTime(String token) {
+		// TODO Auto-generated method stub
+		try {
+			int id = UserToken.tokenVerify(token);
+
+			List<LogInTime> logTime = userDao.getTime(id);
+			System.out.println(logTime);
+
+			return logTime;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+		
+		
+		
+	}
+
 	
-}
+
 

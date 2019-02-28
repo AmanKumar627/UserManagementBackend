@@ -2,7 +2,10 @@ package com.fundoo.services;
 
 
 
+import java.util.List;
+
 import com.fundoo.dto.UserDto;
+import com.fundoo.models.LogInTime;
 import com.fundoo.models.User;
 
 
@@ -23,6 +26,7 @@ public interface UserService {
    public User getUser(String token);
    public UserDto loginUser(User user);
    boolean updapteUser(User user);
+   List<LogInTime> getTime(String token);
 }
 	
 	

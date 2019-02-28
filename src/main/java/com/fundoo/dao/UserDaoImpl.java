@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fundoo.dto.UserDto;
+import com.fundoo.models.LogInTime;
 import com.fundoo.models.User;
 
 @Repository
@@ -162,6 +163,19 @@ public  class UserDaoImpl implements UserDAO {
 				factory.getCurrentSession().update(user);
 				
 				return true;
+			}
+
+			@SuppressWarnings({ "rawtypes", "unchecked" })
+			@Override
+			public List<LogInTime> getTime(int id) {
+				// TODO Auto-generated method stub
+				
+				Query query = factory.getCurrentSession().createQuery("FROM LogInTime  where userid= :id");
+				query.setParameter("id", id);
+
+				return (List<LogInTime>) query.list();
+				
+				
 			}
 
 			

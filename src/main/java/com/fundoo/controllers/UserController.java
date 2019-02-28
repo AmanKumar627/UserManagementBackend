@@ -8,6 +8,7 @@ package com.fundoo.controllers;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fundoo.dto.UserDto;
+import com.fundoo.models.LogInTime;
 import com.fundoo.models.Response;
 import com.fundoo.models.User;
 import com.fundoo.services.UserService;
@@ -133,12 +135,12 @@ public class UserController {
 		if (check != null) {
 			if (check.getRole().equals("admin")) {
 				String token = UserToken.generateToken(check.getId());
-								
+				check.setLastloginStamp(new Date());				
 				userService.updapteUser(check);
 				
 				
-				httpServletResponse.addHeader("jwtTokenxxx", token);
-				System.out.println(token);
+//				httpServletResponse.addHeader("jwtTokenxxx", token);
+//				System.out.println(token);
 				response.setToken(token);
 				response.setMessage("admin");
 				return new ResponseEntity<Response>(response, HttpStatus.OK);
@@ -164,6 +166,23 @@ public class UserController {
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 
 	}
+	
+	
+	
+	@RequestMapping(value="/logInTime",method= RequestMethod.GET)
+	public ResponseEntity <List<LogInTime>> getTime(@RequestHeader("token") String token){
+		
+		
+		List<LogInTime> logTime=userService.getTime(token);
+		
+		
+		return new ResponseEntity<List<LogInTime>>(logTime,HttpStatus.OK);
+		
+		
+	}
+	
+	
+	
 	
 	
 	

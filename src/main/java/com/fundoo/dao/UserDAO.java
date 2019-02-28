@@ -5,7 +5,10 @@ package com.fundoo.dao;
 
 
 
+import java.util.List;
+
 import com.fundoo.dto.UserDto;
+import com.fundoo.models.LogInTime;
 import com.fundoo.models.User;
 
 public interface UserDAO {
@@ -30,4 +33,6 @@ public interface UserDAO {
 	public User checkemail(String email);
 	public User checkUserByUsername(String userName);
 	boolean updateUser(User user);
+	List<LogInTime> getTime(int id);
+
 }
